@@ -30,6 +30,9 @@ export default class User extends BaseModel {
   @column()
   public rememberMeToken?: string
 
+  @column()
+  public isActive: boolean
+
   @hasMany(() => UserKey)
   public keys: HasMany<typeof UserKey>
 

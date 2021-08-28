@@ -56,7 +56,8 @@ export default class UserRegistersController {
     user.merge({
       name,
       password,
-      username
+      username,
+      isActive: true
     })
 
     await user.save()
