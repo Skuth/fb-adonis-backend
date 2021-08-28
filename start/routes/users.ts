@@ -10,3 +10,6 @@ Route.put("/users/forgot-password/", "Users/ForgotPassword.update").middleware("
 
 Route.get("/users", "Users/Main.show").middleware("auth")
 Route.put("/users", "Users/Main.update").middleware("auth")
+
+Route.put("/users/avatar", "Users/Avatar.update").middleware("auth")
+Route.delete("/users/avatar", "Users/Avatar.destroy").middleware("auth")

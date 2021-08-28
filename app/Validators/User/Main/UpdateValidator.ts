@@ -11,7 +11,5 @@ export default class UpdateValidator {
     password: schema.string.optional({ trim: true }, [rules.confirmed("passwordConfirmation")])
   })
 
-  public cacheKey = this.ctx.routeKey
-
   public messages = {}
 }

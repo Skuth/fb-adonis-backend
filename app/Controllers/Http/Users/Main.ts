@@ -5,12 +5,16 @@ export default class UsersController {
   public async show({ auth }: HttpContextContract) {
     const user = auth.user!
 
+    await user.load("avatar")
+
     return user
   }
 
   public async update({ request, auth }: HttpContextContract) {
     const data = await request.validate(UpdateValidator)
     const user = auth.user!
+
+    data.username = String(data.username).toLowerCase()
 
     user.merge(data)
 
