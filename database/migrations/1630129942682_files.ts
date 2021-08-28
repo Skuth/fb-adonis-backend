@@ -6,7 +6,7 @@ export default class Files extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments("id")
+      table.increments("id").primary()
 
       table.enu("file_category", fileCategories).notNullable()
       table.string("file_name").notNullable()

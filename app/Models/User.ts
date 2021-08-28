@@ -9,7 +9,7 @@ import {
   hasOne,
   HasOne
 } from "@ioc:Adonis/Lucid/Orm"
-import { UserKey, File } from "App/Models"
+import { UserKey, File, Post } from "App/Models"
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -41,6 +41,9 @@ export default class User extends BaseModel {
     onQuery: (query) => query.where({ fileCategory: "avatar" })
   })
   public avatar: HasOne<typeof File>
+
+  @hasMany(() => Post)
+  public posts: HasMany<typeof Post>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
