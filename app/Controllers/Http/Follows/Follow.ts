@@ -15,7 +15,7 @@ export default class FollowController {
     if (!user) {
       return response.notFound({
         error: {
-          message: "User not founded"
+          message: "User not founded!"
         }
       })
     }

@@ -1,21 +1,21 @@
 import BaseSchema from "@ioc:Adonis/Lucid/Schema"
 
-export default class Follows extends BaseSchema {
-  protected tableName = "follows"
+export default class Conversations extends BaseSchema {
+  protected tableName = "conversations"
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary()
 
       table
-        .integer("follower_id")
+        .integer("user_id_one")
         .unsigned()
         .references("users.id")
         .onUpdate("CASCADE")
         .onDelete("CASCADE")
 
       table
-        .integer("following_id")
+        .integer("user_id_two")
         .unsigned()
         .references("users.id")
         .onUpdate("CASCADE")

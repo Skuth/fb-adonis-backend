@@ -1,9 +1,7 @@
 import { DateTime } from "luxon"
 import { BaseModel, column, belongsTo, BelongsTo } from "@ioc:Adonis/Lucid/Orm"
-
 import { ReactionTypes } from "App/Utils"
-
-import { User, Post } from "."
+import { User, Post } from "App/Models"
 
 export default class Reaction extends BaseModel {
   @column({ isPrimary: true })
