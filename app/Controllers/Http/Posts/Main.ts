@@ -19,6 +19,16 @@ export default class PostsController {
         query.select(["id", "name", "username"])
         query.preload("avatar")
       })
+
+      query.withCount("comments")
+
+      query.preload("comments", (query) => {
+        query.select(["userId", "id", "content", "createdAt", "updatedAt"])
+        query.preload("user", (query) => {
+          query.select(["id", "name", "username"])
+          query.preload("avatar")
+        })
+      })
     })
 
     return user.posts
