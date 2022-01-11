@@ -7,7 +7,10 @@ import {
   hasMany,
   HasMany,
   hasOne,
-  HasOne
+  HasOne,
+  manyToMany,
+  ManyToMany,
+  computed
 } from "@ioc:Adonis/Lucid/Orm"
 import { UserKey, File, Post } from "App/Models"
 
@@ -45,6 +48,22 @@ export default class User extends BaseModel {
   @hasMany(() => Post)
   public posts: HasMany<typeof Post>
 
+  // followers
+  @manyToMany(() => User, {
+    pivotTable: "follows",
+    pivotForeignKey: "following_id",
+    pivotRelatedForeignKey: "follower_id"
+  })
+  public followers: ManyToMany<typeof User>
+
+  // following
+  @manyToMany(() => User, {
+    pivotTable: "follows",
+    pivotForeignKey: "follower_id",
+    pivotRelatedForeignKey: "following_id"
+  })
+  public following: ManyToMany<typeof User>
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
@@ -56,5 +75,25 @@ export default class User extends BaseModel {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password)
     }
+  }
+
+  @computed()
+  public get postsCount() {
+    return this.$extras.posts_count
+  }
+
+  @computed()
+  public get followersCount() {
+    return this.$extras.followers_count
+  }
+
+  @computed()
+  public get followingCount() {
+    return this.$extras.following_count
+  }
+
+  @computed()
+  public get isFollowing() {
+    return this.$extras.is_following
   }
 }

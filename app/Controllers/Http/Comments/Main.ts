@@ -9,7 +9,11 @@ export default class CommentsController {
     const post = await Post.find(postId)
 
     if (!post) {
-      return response.notFound()
+      return response.notFound({
+        error: {
+          message: "Post not founded!"
+        }
+      })
     }
 
     const comment = await post.related("comments").create({ content, userId: auth.user!.id })
@@ -23,7 +27,11 @@ export default class CommentsController {
     const comment = await Comment.find(params.id)
 
     if (!comment) {
-      return response.notFound()
+      return response.notFound({
+        error: {
+          message: "Comment not founded!"
+        }
+      })
     }
 
     if (auth.user!.id !== comment.userId) {
@@ -41,7 +49,11 @@ export default class CommentsController {
     const comment = await Comment.find(params.id)
 
     if (!comment) {
-      return response.notFound()
+      return response.notFound({
+        error: {
+          message: "Comment not founded!"
+        }
+      })
     }
 
     if (auth.user!.id !== comment.userId) {
@@ -49,5 +61,7 @@ export default class CommentsController {
     }
 
     await comment.delete()
+
+    return response.gone()
   }
 }

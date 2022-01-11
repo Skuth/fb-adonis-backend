@@ -105,5 +105,7 @@ export default class PostsController {
     }
 
     await post.delete()
+
+    return response.gone()
   }
 }

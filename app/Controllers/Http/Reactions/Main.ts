@@ -11,7 +11,11 @@ export default class ReactionsController {
     const post = await Post.find(postId)
 
     if (!post) {
-      return response.notFound()
+      return response.notFound({
+        error: {
+          message: "Post not founded!"
+        }
+      })
     }
 
     const reaction = await post
@@ -25,7 +29,11 @@ export default class ReactionsController {
     const reaction = await Reaction.find(params.id)
 
     if (!reaction) {
-      return response.notFound()
+      return response.notFound({
+        error: {
+          message: "Reaction not founded!"
+        }
+      })
     }
 
     if (reaction.userId !== auth.user!.id) {
@@ -33,5 +41,7 @@ export default class ReactionsController {
     }
 
     await reaction.delete()
+
+    return response.gone()
   }
 }

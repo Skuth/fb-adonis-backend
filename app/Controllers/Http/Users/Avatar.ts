@@ -31,7 +31,7 @@ export default class UserAvatarController {
     return avatar
   }
 
-  public async destroy({ auth }: HttpContextContract) {
+  public async destroy({ auth, response }: HttpContextContract) {
     await Database.transaction(async (trx) => {
       const user = auth.user!.useTransaction(trx)
 
@@ -45,5 +45,7 @@ export default class UserAvatarController {
 
       fs.unlinkSync(Application.tmpPath("uploads", avatar.fileName))
     })
+
+    return response.gone()
   }
 }
