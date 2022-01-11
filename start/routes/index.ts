@@ -5,6 +5,7 @@ import "./users"
 import "./uploads"
 import "./posts"
 import "./comments"
+import "./reactions"
 
 Route.get("/user-register", async ({ view }) => {
   return view.render("emails/register")

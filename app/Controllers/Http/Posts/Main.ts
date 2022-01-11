@@ -29,6 +29,35 @@ export default class PostsController {
           query.preload("avatar")
         })
       })
+
+      query.withCount("reactions", (query) => {
+        query.where("type", "like")
+        query.as("like_count")
+      })
+
+      query.withCount("reactions", (query) => {
+        query.where("type", "love")
+        query.as("love_count")
+      })
+
+      query.withCount("reactions", (query) => {
+        query.where("type", "haha")
+        query.as("haha_count")
+      })
+
+      query.withCount("reactions", (query) => {
+        query.where("type", "sad")
+        query.as("sad_count")
+      })
+
+      query.withCount("reactions", (query) => {
+        query.where("type", "angry")
+        query.as("angry_count")
+      })
+
+      query.preload("reactions", () => {
+        query.where("userId", auth.user!.id).first()
+      })
     })
 
     return user.posts
