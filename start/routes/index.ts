@@ -11,6 +11,12 @@ import "./reactions"
 import "./messages"
 import "./conversations"
 
+Route.get("/", async ({ response }) => {
+  return response.ok({
+    message: "Ok!"
+  })
+})
+
 Route.get("/user-register", async ({ view }) => {
   return view.render("emails/register")
 })
