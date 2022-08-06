@@ -8,6 +8,7 @@ export default class File extends BaseModel {
 
   @column({ serializeAs: null })
   public fileCategory: FileCategory
+
   @column({ serializeAs: null })
   public fileName: string
 
